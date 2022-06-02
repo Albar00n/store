@@ -1,0 +1,15 @@
+import "./card-item.scss";
+
+const CardItem = ({cardItem}) => {
+    const { name,quantity,price,imageUrl} = cardItem;
+    return (
+        <div className="card-item-container">
+            <img src={imageUrl} alt={`${name}`}/>
+            <div className="item-details">
+                <span className="name">{name}</span>
+                <span>{quantity} x {price}</span>
+            </div>
+        </div>
+    )
+};
+export default CardItem;
