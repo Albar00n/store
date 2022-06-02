@@ -4,10 +4,12 @@ import FormInput from '../form-input/form-input';
 import Button from '../button/button';
 
 import {
+  createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from '../../utils/firebase.utils';
 
+// import { UserContext } from '../../contexts/user.contexts'
 import  './sign-in.scss';
 
 const defaultFormFields = {
@@ -19,20 +21,24 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+    // const { setCurrentUser } = useContext(UserContext);
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+await signInWithGooglePopup();
+  //  setCurrentUser(user);
+
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-        const response = await signInAuthUserWithEmailAndPassword(email, password);
-        console.log(response);
+        const { user }= await signInAuthUserWithEmailAndPassword(email, password);
+        // setCurrentUser(user);
         resetFormFields();
     } catch (error) {
         switch (error.code){
